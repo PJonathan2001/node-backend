@@ -1,46 +1,46 @@
 import { Request, Response } from 'express';
-import { ICategory, Category } from '../models/categoria.model';
+import { IComputer, Computer } from '../models/computer.model';
 import { IResponse } from '../models/response.model';
 
 
-export const createCategory = async (req: Request, res: Response)=> {           
-    const {nombreCategoria}: ICategory = req.body;
-    const response = await new CategoryController().create({ nombreCategoria});         
+export const createComputer = async (req: Request, res: Response)=> {           
+    const {procesador, pantalla, ram, rom,año_lanzamiento}: IComputer = req.body;
+    const response = await new PlayerController().create({ procesador, pantalla, ram, rom,año_lanzamiento});         
     return res.status(response.status).json(response);   
 }
 
-export const retrieveCategory = async (req: Request, res: Response) => {
+export const retrieveComputer = async (req: Request, res: Response) => {
    const docId : String = req.params.id; 
-   const response = await new CategoryController().retrieve(docId);         
+   const response = await new PlayerController().retrieve(docId);         
    return res.status(response.status).json(response);   
 }
 
-export const updateCategory = async (req: Request, res: Response)=> {           
-    const { nombreCategoria } : ICategory = req.body;
+export const updateComputer = async (req: Request, res: Response)=> {           
+    const { procesador, pantalla, ram, rom, año_lanzamiento} : IComputer = req.body;
     const docId : String = req.params.id; 
-    const response = await new CategoryController().update(docId, { nombreCategoria });         
+    const response = await new PlayerController().update(docId, { procesador, pantalla, ram, rom,año_lanzamiento });         
     return res.status(response.status).json(response);   
 }
 
-export const deleteCategory = async (req: Request, res: Response) => {
+export const deleteComputer = async (req: Request, res: Response) => {
     const docId : String = req.params.id; 
-    const response = await new CategoryController().delete(docId);         
+    const response = await new PlayerController().delete(docId);         
     return res.status(response.status).json(response);   
  }
 
-export const listCategorys = async (req: Request, res: Response) => {
-    const response = await new CategoryController().list();         
+export const listComputers = async (req: Request, res: Response) => {
+    const response = await new PlayerController().list();         
     return res.status(200).json(response);    
 }
 
 
 
 
-class CategoryController {
+class PlayerController {
 
-    public async create(payload : ICategory) : Promise<IResponse> {
-        const category = new Category(payload);
-        return category.save().then(data => {
+    public async create(payload : IComputer) : Promise<IResponse> {
+        const computer = new Computer(payload);
+        return computer.save().then(data => {
             return {
                 message: "CREATED: Player added to database",
                 status: 201,
@@ -56,7 +56,7 @@ class CategoryController {
     }
 
     public async retrieve(docId: String) : Promise<IResponse> {        
-        return Category.findOne({_id: docId}).then(data => {
+        return Computer.findOne({_id: docId}).then(data => {
             if(data === null) {
                 return {
                     message: "NOT FOUND: Player not found",
@@ -71,16 +71,20 @@ class CategoryController {
             };
         }).catch(err => {
             return {
-                message: "INTERNAL SERVER ERROR: " + err.direccion ,
+                message: "INTERNAL SERVER ERROR: " + err.ram ,
                 status: 500,
                 content : err
             };
         });        
     }
 
-    public async update(docId: String, payload : ICategory) : Promise<IResponse>{
-        return Category.updateOne({_id: docId} , { $set: { 
-            nombreCategoria: payload.nombreCategoria 
+    public async update(docId: String, payload : IComputer) : Promise<IResponse>{
+        return Computer.updateOne({_id: docId} , { $set: { 
+            procesador: payload.procesador, 
+            pantalla: payload.pantalla, 
+            ram: payload.ram, 
+            rom: payload.rom,
+            año_lanzamiento: payload.año_lanzamiento
           } }).then(data => {            
             return {
                 message: "OK: Player updated",
@@ -100,7 +104,7 @@ class CategoryController {
 
 
     public async delete(docId: String) : Promise<IResponse> {
-        return Category.deleteOne({_id: docId}).then(data => {
+        return Computer.deleteOne({_id: docId}).then(data => {
             if (data.deletedCount == 0) {
                 return {
                     message: "NOT FOUND: Player not found",
@@ -115,7 +119,7 @@ class CategoryController {
             }
         }).catch(err => {
             return {
-                message: "INTERNAL SERVER ERROR: " + err.direccion,
+                message: "INTERNAL SERVER ERROR: " + err.ram,
                 status: 500,
                 content : err
             }
@@ -123,7 +127,7 @@ class CategoryController {
     }
 
     public async list() : Promise<IResponse> {
-        return Category.find({}).then(data => {
+        return Computer.find({}).then(data => {
                 return {
                     message: "OK: All players retrieve",
                     status: 200,

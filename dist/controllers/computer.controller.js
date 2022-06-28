@@ -9,38 +9,38 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.listClientes = exports.deleteCliente = exports.updateCliente = exports.retrieveCliente = exports.createCliente = void 0;
+exports.listComputers = exports.deleteComputer = exports.updateComputer = exports.retrieveComputer = exports.createComputer = void 0;
 const computer_model_1 = require("../models/computer.model");
-const createCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const createComputer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { procesador, pantalla, ram, rom, año_lanzamiento } = req.body;
     const response = yield new PlayerController().create({ procesador, pantalla, ram, rom, año_lanzamiento });
     return res.status(response.status).json(response);
 });
-exports.createCliente = createCliente;
-const retrieveCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.createComputer = createComputer;
+const retrieveComputer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const docId = req.params.id;
     const response = yield new PlayerController().retrieve(docId);
     return res.status(response.status).json(response);
 });
-exports.retrieveCliente = retrieveCliente;
-const updateCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.retrieveComputer = retrieveComputer;
+const updateComputer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { procesador, pantalla, ram, rom, año_lanzamiento } = req.body;
     const docId = req.params.id;
     const response = yield new PlayerController().update(docId, { procesador, pantalla, ram, rom, año_lanzamiento });
     return res.status(response.status).json(response);
 });
-exports.updateCliente = updateCliente;
-const deleteCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateComputer = updateComputer;
+const deleteComputer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const docId = req.params.id;
     const response = yield new PlayerController().delete(docId);
     return res.status(response.status).json(response);
 });
-exports.deleteCliente = deleteCliente;
-const listClientes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteComputer = deleteComputer;
+const listComputers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield new PlayerController().list();
     return res.status(200).json(response);
 });
-exports.listClientes = listClientes;
+exports.listComputers = listComputers;
 class PlayerController {
     create(payload) {
         return __awaiter(this, void 0, void 0, function* () {
