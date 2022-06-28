@@ -47,13 +47,13 @@ class PlayerController {
             const computer = new computer_model_1.Computer(payload);
             return computer.save().then(data => {
                 return {
-                    message: "CREATED: Player added to database",
+                    message: "CREATED: Computer added to database",
                     status: 201,
                     content: data
                 };
             }).catch(err => {
                 return {
-                    message: "Error on create Player",
+                    message: "Error on create Computer",
                     status: 500,
                     content: err
                 };
@@ -65,13 +65,13 @@ class PlayerController {
             return computer_model_1.Computer.findOne({ _id: docId }).then(data => {
                 if (data === null) {
                     return {
-                        message: "NOT FOUND: Player not found",
+                        message: "NOT FOUND: Computer not found",
                         status: 404,
                         content: data
                     };
                 }
                 return {
-                    message: "OK: Player retrieve",
+                    message: "OK: Computer retrieve",
                     status: 200,
                     content: data
                 };
@@ -94,13 +94,13 @@ class PlayerController {
                     año_lanzamiento: payload.año_lanzamiento
                 } }).then(data => {
                 return {
-                    message: "OK: Player updated",
+                    message: "OK: Computer updated",
                     status: 200,
                     content: data
                 };
             }).catch(err => {
                 return {
-                    message: "INTERNAL SERVER ERROR: Player not updated",
+                    message: "INTERNAL SERVER ERROR: Computer not updated",
                     status: 500,
                     content: err
                 };
@@ -112,13 +112,13 @@ class PlayerController {
             return computer_model_1.Computer.deleteOne({ _id: docId }).then(data => {
                 if (data.deletedCount == 0) {
                     return {
-                        message: "NOT FOUND: Player not found",
+                        message: "NOT FOUND: Computer not found",
                         status: 404,
                         content: data
                     };
                 }
                 return {
-                    message: "OK: Player deleted",
+                    message: "OK: Computer deleted",
                     status: 200,
                     content: data
                 };
@@ -135,12 +135,12 @@ class PlayerController {
         return __awaiter(this, void 0, void 0, function* () {
             return computer_model_1.Computer.find({}).then(data => {
                 return {
-                    message: "OK: All players retrieve",
+                    message: "OK: All Computers retrieve",
                     status: 200,
                     content: data
                 };
             }).catch(err => {
-                return { message: "Error on retrieve Players", status: 500, content: err };
+                return { message: "Error on retrieve Computers", status: 500, content: err };
             });
         });
     }
