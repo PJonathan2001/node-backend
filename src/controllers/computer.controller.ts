@@ -4,8 +4,8 @@ import { IResponse } from '../models/response.model';
 
 
 export const createComputer = async (req: Request, res: Response)=> {           
-    const {procesador, pantalla, ram, rom,año_lanzamiento}: IComputer = req.body;
-    const response = await new PlayerController().create({ procesador, pantalla, ram, rom,año_lanzamiento});         
+    const {procesador, pantalla, ram, rom,anio_lanzamiento}: IComputer = req.body;
+    const response = await new PlayerController().create({ procesador, pantalla, ram, rom,anio_lanzamiento});         
     return res.status(response.status).json(response);   
 }
 
@@ -16,9 +16,9 @@ export const retrieveComputer = async (req: Request, res: Response) => {
 }
 
 export const updateComputer = async (req: Request, res: Response)=> {           
-    const { procesador, pantalla, ram, rom, año_lanzamiento} : IComputer = req.body;
+    const { procesador, pantalla, ram, rom, anio_lanzamiento} : IComputer = req.body;
     const docId : String = req.params.id; 
-    const response = await new PlayerController().update(docId, { procesador, pantalla, ram, rom,año_lanzamiento });         
+    const response = await new PlayerController().update(docId, { procesador, pantalla, ram, rom,anio_lanzamiento });         
     return res.status(response.status).json(response);   
 }
 
@@ -84,7 +84,7 @@ class PlayerController {
             pantalla: payload.pantalla, 
             ram: payload.ram, 
             rom: payload.rom,
-            año_lanzamiento: payload.año_lanzamiento
+            anio_lanzamiento: payload.anio_lanzamiento
           } }).then(data => {            
             return {
                 message: "OK: Computer updated",
@@ -127,7 +127,7 @@ class PlayerController {
     }
 
     public async list() : Promise<IResponse> {
-        return Computer.find({}).then(data => {
+        return await Computer.find({}).then(data => {
                 return {
                     message: "OK: All Computers retrieve",
                     status: 200,

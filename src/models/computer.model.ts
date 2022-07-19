@@ -6,7 +6,7 @@ export interface IComputer {
     pantalla:           null | string;
     ram:             null | string;
     rom:                null | string;
-    año_lanzamiento:     null | Date;
+    anio_lanzamiento:     null | Date;
 
 } 
 
@@ -16,7 +16,7 @@ const computerSchema = new Schema<IComputer>({
     pantalla : {type: String},
     ram : {type: String},
     rom : {type: String},
-    año_lanzamiento : {type: Date}
+    anio_lanzamiento : {type: Date}
 });
 
 //Model
